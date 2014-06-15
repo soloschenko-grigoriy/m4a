@@ -8,9 +8,7 @@ function( Backbone, PlayerTmpl  ) {
 	/* Return a ItemView class definition */
 	return Backbone.Marionette.ItemView.extend({
 
-		initialize: function() {
-			console.log("initialize a Player ItemView");
-		},
+		initialize: function() {},
 		
     template: PlayerTmpl,
       

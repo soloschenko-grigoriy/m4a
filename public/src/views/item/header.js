@@ -9,7 +9,6 @@ function( Backbone, HeaderTmpl  ) {
 	return Backbone.Marionette.ItemView.extend({
 
 		initialize: function() {
-			console.log("initialize a Header ItemView");
 		},
 		
     	template: HeaderTmpl,

@@ -9,7 +9,6 @@ function( Backbone, FooterTmpl  ) {
 	return Backbone.Marionette.ItemView.extend({
 
 		initialize: function() {
-			console.log('initialize a Footer ItemView');
 		},
 
     template: FooterTmpl,

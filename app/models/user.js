@@ -2,7 +2,6 @@
 /*!
  * Module dependencies
  */
-
 var mongoose = require('mongoose');
 var userPlugin = require('mongoose-user');
 var Schema = mongoose.Schema;
@@ -34,21 +33,14 @@ UserSchema.plugin(userPlugin, {});
 /**
  * Methods
  */
-
-UserSchema.method({
-
-});
+UserSchema.method({});
 
 /**
  * Statics
  */
-
-UserSchema.static({
-
-});
+UserSchema.static({});
 
 /**
  * Register
  */
-
 mongoose.model('User', UserSchema);
