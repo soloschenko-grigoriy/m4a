@@ -8,7 +8,8 @@
  */
 var mongoose = require('mongoose'),
     Album    = mongoose.model('Album'),
-    Artist   = mongoose.model('Artist');
+    Artist   = mongoose.model('Artist'),
+    Song     = mongoose.model('Song');
 
 /**
  * Get list controller
@@ -27,7 +28,7 @@ exports.list = function (req, res)
         page: page
       };
 
-  Album.list(options, function(err, articles) {
+  Song.list(options, function(err, articles) {
     if(err){
       return res.send('500', err);
     }
@@ -46,7 +47,7 @@ exports.list = function (req, res)
  */
 exports.load = function (req, res, next)
 {
-  Album.load(req.params.id, function (err, article){
+  Song.load(req.params.id, function (err, article){
     if(err){
       return next(err);
     }

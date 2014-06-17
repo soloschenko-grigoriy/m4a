@@ -1,5 +1,5 @@
 /**
- * @class Albums controller
+ * @class Artist controller
  *
  * version 0.0.1
  *
@@ -7,7 +7,6 @@
  * 
  */
 var mongoose = require('mongoose'),
-    Album    = mongoose.model('Album'),
     Artist   = mongoose.model('Artist');
 
 /**
@@ -27,13 +26,17 @@ exports.list = function (req, res)
         page: page
       };
 
-  Album.list(options, function(err, articles) {
+  Artist.list(options, function(err, articles) {
     if(err){
-      return res.send('500', err);
+      res.send('500', err);
+
+      return;
     }
 
     res.json(articles);
   });
+
+  return;
 };
 
 /**
@@ -46,13 +49,17 @@ exports.list = function (req, res)
  */
 exports.load = function (req, res, next)
 {
-  Album.load(req.params.id, function (err, article){
+  Artist.load(req.params.id, function (err, article){
     if(err){
-      return next(err);
+      next(err);
+
+      return;
     }
 
     if(!article){
-      return res.send('404', 'Not found');
+      res.send('404', 'Not found');
+
+      return;
     }
 
     res.json(article);

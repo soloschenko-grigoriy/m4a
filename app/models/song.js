@@ -1,5 +1,5 @@
 /**
- * @class Album model
+ * @class Song model
  *
  * version 0.0.1
  *
@@ -15,7 +15,8 @@ var mongoose = require('mongoose');
 var Schema = new mongoose.Schema({
   name    : String,
   img     : String,
-  _artist : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' }
+  _artist : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
+  _album  : { type: mongoose.Schema.Types.ObjectId, ref: 'Album' }
 });
 
 /**
@@ -33,6 +34,8 @@ Schema.statics = {
   load: function (id, cb) {
     this
       .findById(id)
+      .populate('_artist')
+      .populate('_album')
       .exec(cb);
   },
 
@@ -48,6 +51,7 @@ Schema.statics = {
 
     this.find(criteria)
       .populate('_artist')
+      .populate('_album')
       .exec(cb);
   }
 
@@ -56,4 +60,4 @@ Schema.statics = {
 /**
  * Register
  */
-mongoose.model('Album', Schema);
+mongoose.model('Song', Schema);

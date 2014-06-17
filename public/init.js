@@ -25,6 +25,7 @@ require.config({
         'backbone.marionette': '../vendor/backbone.marionette/lib/core/amd/backbone.marionette',
         'backbone.wreqr': '../vendor/backbone.wreqr/lib/amd/backbone.wreqr',
         'backbone.babysitter': '../vendor/backbone.babysitter/lib/amd/backbone.babysitter',
+        'backbone.relational': '../vendor/backbone-relational/backbone-relational',
 
         /* alias the bootstrap js lib */
         bootstrap: '../vendor/bootstrap/dist/js/bootstrap.min',
@@ -47,17 +48,19 @@ require.config({
     }
 });
 require([
-  'application',
   'backbone',
   'bootstrap',
   'backbone.marionette',
-  'regionManager',
-  'text!../assets/css/bootstrap.min.css',
-  'text!../assets/css/main.css',
-  'text!../assets/css/responsive.css'
+  'backbone.relational'
 ],
-function (App) {
+function () {
     'use strict';
+    require(['application', 'regionManager', 'controllers/main', 'routers/main'], function(App, RM, MainController, MainRouter){
+        App.start();
 
-    App.start();
+        new MainRouter({ controller: MainController });
+        
+        Backbone.history.start({ pushState: true });
+    });
+    
 });

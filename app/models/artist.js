@@ -1,10 +1,5 @@
 /**
- * @class Album model
- *
- * version 0.0.1
- *
- * @author Soloschenko G. soloschenko@gmail.com
- * 
+ * Module dependencies
  */
 var mongoose = require('mongoose');
 
@@ -14,8 +9,7 @@ var mongoose = require('mongoose');
  */
 var Schema = new mongoose.Schema({
   name    : String,
-  img     : String,
-  _artist : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' }
+  img     : String
 });
 
 /**
@@ -30,7 +24,8 @@ Schema.statics = {
    * @param {Function} cb
    * @api private
    */
-  load: function (id, cb) {
+  load: function (id, cb)
+  {
     this
       .findById(id)
       .exec(cb);
@@ -43,11 +38,11 @@ Schema.statics = {
    * @param {Function} cb
    * @api private
    */
-  list: function (options, cb) {
+  list: function (options, cb)
+  {
     var criteria = options.criteria || {};
 
     this.find(criteria)
-      .populate('_artist')
       .exec(cb);
   }
 
@@ -56,4 +51,4 @@ Schema.statics = {
 /**
  * Register
  */
-mongoose.model('Album', Schema);
+mongoose.model('Artist', Schema);

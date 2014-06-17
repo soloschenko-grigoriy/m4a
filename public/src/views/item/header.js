@@ -18,7 +18,8 @@ function( Backbone, HeaderTmpl  ) {
     	ui: {},
 
 		/* Ui events hash */
-		events: {},
+		events: {
+    },
 
 		/* on render callback */
 		onRender: function() {}
