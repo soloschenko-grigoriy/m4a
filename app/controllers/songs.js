@@ -25,7 +25,9 @@ exports.list = function (req, res)
       perPage = 30,
       options = {
         perPage: perPage,
-        page: page
+        page: page,
+        limit: req.param('limit') ? req.param('limit') : 0,
+        sort: req.param('sort') ? req.param('sort') : '_id'
       };
 
   Song.list(options, function(err, articles) {
@@ -47,15 +49,47 @@ exports.list = function (req, res)
  */
 exports.load = function (req, res, next)
 {
-  Song.load(req.params.id, function (err, article){
+  Song.load(req.params.id, function (err, song){
     if(err){
       return next(err);
     }
 
-    if(!article){
+    if(!song){
       return res.send('404', 'Not found');
     }
 
-    res.json(article);
+    res.json(song);
+  });
+};
+
+exports.create = function (req, res, next)
+{
+  var options = {
+    name      : req.param('name'),
+    img       : req.param('img'),
+    _artist   : req.param('_artist'),
+    _album    : req.param('_album')
+  };
+  
+  Song.create(options, function(err, song){
+    if(err){
+      return next(err);
+    }
+
+    if(!song){
+      return res.send('404', 'Not found');
+    }
+
+    Song.load(song._id, function (err, song){
+      if(err){
+        return next(err);
+      }
+
+      if(!song){
+        return res.send('404', 'Not found');
+      }
+
+      res.json(song);
+    });
   });
 };

@@ -31,7 +31,7 @@ define(['backbone', 'models/artist'], function(Backbone, Artist){
      * 
      * @type {String}
      */
-    url: '/api/v1/albums',
+    urlRoot: '/api/v1/albums',
     
     /**
      * Relations for the model
@@ -56,6 +56,13 @@ define(['backbone', 'models/artist'], function(Backbone, Artist){
 
       return this;
     },
+
+    parse: function(response)
+    {
+      response.id = response._id;
+
+      return response;
+    }
 
   });
 });

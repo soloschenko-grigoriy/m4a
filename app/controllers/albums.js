@@ -24,7 +24,9 @@ exports.list = function (req, res)
       perPage = 30,
       options = {
         perPage: perPage,
-        page: page
+        page: page,
+        limit: req.param('limit') ? req.param('limit') : 0,
+        sort: req.param('sort') ? req.param('sort') : '_id'
       };
 
   Album.list(options, function(err, articles) {

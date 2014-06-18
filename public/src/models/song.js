@@ -7,11 +7,11 @@
  * @copyright Soloschenko G. soloschenko@gmail.com
  * 
  */
-define(['backbone'], function(Backbone){
+define(['backbone', 'models/artist', 'models/album'], function(Backbone, Artist, Album){
 
   'use strict';
 
-  return Backbone.Model.extend({
+  return Backbone.RelationalModel.extend({
 
     /**
      * Simply override costructor for best debuging
@@ -23,15 +23,32 @@ define(['backbone'], function(Backbone){
     constructor: function Song()
     {
       
-      return Backbone.Model.prototype.constructor.apply(this, arguments);
+      return Backbone.RelationalModel.prototype.constructor.apply(this, arguments);
     },
+
+    /**
+     * Relations for the model
+     * 
+     * @type {Array}
+     */
+    relations: [{
+      type              : Backbone.HasOne,
+      key               : '_artist',
+      relatedModel      : Artist,
+    },
+    {
+      type              : Backbone.HasOne,
+      key               : '_album',
+      relatedModel      : Album,
+    }
+    ],
 
     /**
      * Url for sync with server
      * 
      * @type {String}
      */
-    url: '/api/v1/songs',
+    urlRoot: '/api/v1/songs',
     
     /**
      * Initialization
@@ -45,6 +62,13 @@ define(['backbone'], function(Backbone){
       
       return this;
     },
+
+    parse: function(response)
+    {
+      response.id = response._id;
+
+      return response;
+    }
 
   });
 });

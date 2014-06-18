@@ -31,7 +31,7 @@ define(['backbone'], function(Backbone){
      * 
      * @type {String}
      */
-    url: '/api/v1/artists',
+    urlRoot: '/api/v1/artists',
     
     /**
      * Initialization
@@ -46,5 +46,12 @@ define(['backbone'], function(Backbone){
       return this;
     },
 
+    parse: function(response)
+    {
+      response.id = response._id;
+
+      return response;
+    }
+    
   });
 });

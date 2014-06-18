@@ -59,7 +59,7 @@ function(Backbone, ItemView, Tmpl, Collection) {
      */
     initialize: function()
     {
-      this.collection.fetch();
+      this.collection.fetchForIndex();
 
       return this;
     },

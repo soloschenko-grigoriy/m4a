@@ -29,6 +29,7 @@ module.exports = function (app){
   // Songs conrollers
   app.get(prefix+'/songs', songs.list);
   app.get(prefix+'/songs/:id', songs.load);
+  app.post(prefix+'/songs', songs.create);
 
   /**
    * Error handling

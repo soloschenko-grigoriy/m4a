@@ -48,6 +48,8 @@ Schema.statics = {
 
     this.find(criteria)
       .populate('_artist')
+      .limit(options.limit)
+      .sort(options.sort)
       .exec(cb);
   }
 

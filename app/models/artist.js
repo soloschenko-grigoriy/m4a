@@ -42,7 +42,10 @@ Schema.statics = {
   {
     var criteria = options.criteria || {};
 
-    this.find(criteria)
+    this
+      .find(criteria)
+      .limit(options.limit)
+      .sort(options.sort)
       .exec(cb);
   }
 

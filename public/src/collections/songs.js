@@ -53,5 +53,20 @@ define(['backbone', 'models/song'], function(Backbone, Model){
         return this;
     },
 
+    /**
+     * Fecth data for index page
+     * 
+     * @return {Backbone.Collection} 
+     */
+    fetchForIndex: function()
+    {
+      return this.fetch({
+        data: {
+          limit: 12,
+          sort: '-date'
+        }
+      });
+    }
+
   });
 });

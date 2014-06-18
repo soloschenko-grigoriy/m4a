@@ -55,12 +55,22 @@ require([
 ],
 function () {
     'use strict';
+    
     require(['application', 'regionManager', 'controllers/main', 'routers/main'], function(App, RM, MainController, MainRouter){
-        App.start();
-
-        new MainRouter({ controller: MainController });
         
-        Backbone.history.start({ pushState: true });
+      $.ajaxSetup({
+        headers: {'X-CSRF-Token': function(name){
+            var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }('csrf_token')
+      }
+      });
+
+      App.start();
+
+      new MainRouter({ controller: MainController });
+      
+      Backbone.history.start({ pushState: true });
     });
     
 });
