@@ -7,9 +7,7 @@
  * 
  */
 var mongoose = require('mongoose'),
-    Album    = mongoose.model('Album'),
-    Artist   = mongoose.model('Artist'),
-    Song     = mongoose.model('Song');
+    Genre    = mongoose.model('Genre');
 
 /**
  * Get list controller
@@ -30,7 +28,7 @@ exports.list = function (req, res)
         sort: req.param('sort') ? req.param('sort') : '_id'
       };
 
-  Song.list(options, function(err, articles) {
+  Genre.list(options, function(err, articles) {
     if(err){
       return res.send('500', err);
     }
@@ -49,16 +47,16 @@ exports.list = function (req, res)
  */
 exports.load = function (req, res, next)
 {
-  Song.load(req.params.id, function (err, song){
+  Genre.load(req.params.id, function (err, article){
     if(err){
       return next(err);
     }
 
-    if(!song){
+    if(!article){
       return res.send('404', 'Not found');
     }
 
-    res.json(song);
+    res.json(article);
   });
 };
 
@@ -67,30 +65,27 @@ exports.create = function (req, res, next)
   var options = {
     name      : req.param('name'),
     img       : req.param('img'),
-    genres    : req.param('genres'),
-    artist    : req.param('artist'),
-    album     : req.param('album')
   };
   
-  Song.create(options, function(err, song){
+  Genre.create(options, function(err, item){
     if(err){
       return next(err);
     }
 
-    if(!song){
+    if(!item){
       return res.send('404', 'Not found');
     }
 
-    Song.load(song._id, function (err, song){
+    Genre.load(item._id, function (err, item){
       if(err){
         return next(err);
       }
 
-      if(!song){
+      if(!item){
         return res.send('404', 'Not found');
       }
 
-      res.json(song);
+      res.json(item);
     });
   });
 };

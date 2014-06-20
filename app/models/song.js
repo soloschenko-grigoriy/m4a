@@ -6,9 +6,7 @@
  * @author Soloschenko G. soloschenko@gmail.com
  * 
  */
-var mongoose = require('mongoose'),
-    Album    = mongoose.model('Album'),
-    Artist   = mongoose.model('Artist');
+var mongoose = require('mongoose');
 
 /**
  * 
@@ -17,8 +15,9 @@ var mongoose = require('mongoose'),
 var Schema = new mongoose.Schema({
   name    : String,
   img     : String,
-  _artist : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
-  _album  : { type: mongoose.Schema.Types.ObjectId, ref: 'Album' },
+  album   : { type: mongoose.Schema.Types.ObjectId, ref: 'Album' },
+  artist  : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
+  genres  : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
   date    : { type: Date, default : Date.now}
 });
 
@@ -37,8 +36,9 @@ Schema.statics = {
   {
     this
       .findById(id)
-      .populate('_artist')
-      .populate('_album')
+      .populate('album')
+      .populate('artist')
+      .populate('genres')
       .exec(cb);
 
     return this;
@@ -55,8 +55,9 @@ Schema.statics = {
 
     this
       .find(criteria)
-      .populate('_artist')
-      .populate('_album')
+      .populate('album')
+      .populate('artist')
+      .populate('genres')
       .limit(options.limit)
       .sort(options.sort)
       .exec(cb);
@@ -73,18 +74,31 @@ Schema.statics = {
    */
   create: function(options, cb)
   {
-    if(options._artist && options._artist._id){
-      options._artist = options._artist._id;
+    if(options.artist && options.artist._id){
+      options.artist = options.artist._id;
     }else{
-      options._artist = null;
+      options.artist = null;
+    }
+    
+    if(options.album && options.album._id){
+      options.album = options.album._id;
+    }else{
+      options.album = null;
     }
 
-    if(options._album && options._album._id){
-      options._album = options._album._id;
-    }else{
-      options._album = null;
-    }
+    if(options.genres){
+      var ids = [];
+      for(var key in options.genres){
+        if(options.genres[key]._id){
+          ids.push(options.genres[key]._id);
+        }
+      }
 
+      options.genres = ids;
+    }else{
+      options.genres = null;
+    }
+    
     return new this(options).save(cb);
   }
 };

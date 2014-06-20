@@ -1,5 +1,10 @@
 /**
- * Module dependencies
+ * @class Genres model
+ *
+ * version 0.0.1
+ *
+ * @author Soloschenko G. soloschenko@gmail.com
+ * 
  */
 var mongoose = require('mongoose');
 
@@ -10,7 +15,6 @@ var mongoose = require('mongoose');
 var Schema = new mongoose.Schema({
   name    : String,
   img     : String,
-  genres  : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }]
 });
 
 /**
@@ -19,26 +23,24 @@ var Schema = new mongoose.Schema({
 Schema.statics = {
 
   /**
-   * Find article by id
+   * Find item by id
    *
    * @param {ObjectId} id
    * @param {Function} cb
-   * @api private
    */
   load: function (id, cb)
   {
     this
       .findById(id)
-      .populate('genres')
       .exec(cb);
+
+    return this;
   },
 
   /**
-   * List articles
    *
    * @param {Object} options
    * @param {Function} cb
-   * @api private
    */
   list: function (options, cb)
   {
@@ -46,40 +48,27 @@ Schema.statics = {
 
     this
       .find(criteria)
-      .populate('genres')
       .limit(options.limit)
       .sort(options.sort)
       .exec(cb);
+
+    return this;
   },
 
   /**
    * Create route
-   * @param  {Object}   options 
-   * @param  {Function} cb      
+   * @param  {[type]}   options [description]
+   * @param  {Function} cb      [description]
    * 
-   * @return {Artist}           
+   * @return {[type]}           [description]
    */
   create: function(options, cb)
   {
-    if(options.genres){
-      var ids = [];
-      for(var key in options.genres){
-        if(options.genres[key]._id){
-          ids.push(options.genres[key]._id);
-        }
-      }
-
-      options.genres = ids;
-    }else{
-      options.genres = null;
-    }
-
     return new this(options).save(cb);
   }
-
 };
 
 /**
  * Register
  */
-mongoose.model('Artist', Schema);
+mongoose.model('Genre', Schema);

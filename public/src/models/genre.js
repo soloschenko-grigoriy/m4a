@@ -1,5 +1,5 @@
 /**
- * @class Album model
+ * @class Genre model
  *
  * version 0.0.1
  *
@@ -7,7 +7,7 @@
  * @copyright Soloschenko G. soloschenko@gmail.com
  * 
  */
-define(['backbone', 'models/artist'], function(Backbone, Artist){
+define(['backbone'], function(Backbone){
 
   'use strict';
 
@@ -20,9 +20,9 @@ define(['backbone', 'models/artist'], function(Backbone, Artist){
      * 
      * @return {Backbone.Model} 
      */
-    constructor: function Album()
+    constructor: function Genre()
     {
-        
+      
       return Backbone.RelationalModel.prototype.constructor.apply(this, arguments);
     },
 
@@ -31,20 +31,8 @@ define(['backbone', 'models/artist'], function(Backbone, Artist){
      * 
      * @type {String}
      */
-    urlRoot: '/api/v1/albums',
+    urlRoot: '/api/v1/genres',
     
-    /**
-     * Relations for the model
-     * 
-     * @type {Array}
-     */
-    relations: [{
-      type              : Backbone.HasOne,
-      key               : 'artist',
-      relatedModel      : Artist,
-      // autoFetch         : true,
-    }],
-
     /**
      * Initialization
      *
@@ -54,7 +42,7 @@ define(['backbone', 'models/artist'], function(Backbone, Artist){
      */
     initialize: function()
     {
-
+      
       return this;
     },
 
@@ -64,6 +52,6 @@ define(['backbone', 'models/artist'], function(Backbone, Artist){
 
       return response;
     }
-
+    
   });
 });

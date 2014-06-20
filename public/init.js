@@ -18,8 +18,8 @@ require.config({
 
     paths: {
         jquery: '../vendor/jquery/jquery',
-        backbone: '../vendor/backbone-amd/backbone',
-        underscore: '../vendor/underscore-amd/underscore',
+        backbone: '../vendor/backbone/backbone',
+        underscore: '../vendor/underscore/underscore',
 
         /* alias all marionette libs */
         'backbone.marionette': '../vendor/backbone.marionette/lib/core/amd/backbone.marionette',
@@ -44,7 +44,8 @@ require.config({
     },
 
     hbs: {
-        disableI18n: true
+        disableI18n: true,
+        helperDirectory: 'views/helpers/'
     }
 });
 require([

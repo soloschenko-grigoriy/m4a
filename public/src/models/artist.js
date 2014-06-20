@@ -7,7 +7,7 @@
  * @copyright Soloschenko G. soloschenko@gmail.com
  * 
  */
-define(['backbone'], function(Backbone){
+define(['backbone', 'models/genre', 'collections/genres'], function(Backbone, Genre, Genres){
 
   'use strict';
 
@@ -33,6 +33,19 @@ define(['backbone'], function(Backbone){
      */
     urlRoot: '/api/v1/artists',
     
+    /**
+     * Relations for the model
+     * 
+     * @type {Array}
+     */
+    relations: [{
+      type              : Backbone.HasMany,
+      key               : 'genres',
+      relatedModel      : Genre,
+      collectionType    : Genres,
+      // autoFetch         : true,
+    }],
+
     /**
      * Initialization
      *

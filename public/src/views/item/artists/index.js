@@ -24,10 +24,16 @@ function(Backbone, Tmpl) {
 
     className: 'col-sm-3',
 
-    initialize: function() {},
-    
+    initialize: function()
+    {
+      // this.model.get('genres').on('remove', this.some, this);
+    },
+
     /* on render callback */
-    onRender: function() {}
+    onRender: function(){
+      
+      // console.log(this.model.get('genres').models);
+    }
   });
 
 });

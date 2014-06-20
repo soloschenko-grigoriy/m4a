@@ -15,7 +15,7 @@ var mongoose = require('mongoose');
 var Schema = new mongoose.Schema({
   name    : String,
   img     : String,
-  _artist : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' }
+  artist  : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' }
 });
 
 /**
@@ -33,6 +33,7 @@ Schema.statics = {
   load: function (id, cb) {
     this
       .findById(id)
+      .populate('artist')
       .exec(cb);
   },
 
@@ -46,14 +47,37 @@ Schema.statics = {
   list: function (options, cb) {
     var criteria = options.criteria || {};
 
+    var Artist = mongoose.model('Artist');
     this.find(criteria)
-      .populate('_artist')
+      .populate('artist')
       .limit(options.limit)
       .sort(options.sort)
       .exec(cb);
+
+  
+  },
+
+
+  /**
+   * Create route
+   * @param  {Object}   options 
+   * @param  {Function} cb      
+   * 
+   * @return {Album}           
+   */
+  create: function(options, cb)
+  {
+    if(options.artist && options.artist._id){
+      options.artist = options.artist._id;
+    }else{
+      options.artist = null;
+    }
+
+    return new this(options).save(cb);
   }
 
 };
+
 
 /**
  * Register

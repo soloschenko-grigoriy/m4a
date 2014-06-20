@@ -67,3 +67,34 @@ exports.load = function (req, res, next)
     res.json(article);
   });
 };
+
+exports.create = function (req, res, next)
+{
+  var options = {
+    name      : req.param('name'),
+    img       : req.param('img'),
+    genres    : req.param('genres')
+  };
+  
+  Artist.create(options, function(err, item){
+    if(err){
+      return next(err);
+    }
+
+    if(!item){
+      return res.send('404', 'Not found');
+    }
+
+    Artist.load(item._id, function (err, item){
+      if(err){
+        return next(err);
+      }
+
+      if(!item){
+        return res.send('404', 'Not found');
+      }
+
+      res.json(item);
+    });
+  });
+}

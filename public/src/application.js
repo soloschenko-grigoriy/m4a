@@ -5,11 +5,12 @@ define([
   'views/item/header',
   'views/item/footer',
   'models/song',
-  'models/artist',
-  'models/album',
+  'collections/genres',
+  'collections/albums',
+  'collections/artists'
 	],
 
-function(Backbone, Communicator, PlayerView, HeaderView, FooterView, Song, Artist, Album){
+function(Backbone, Communicator, PlayerView, HeaderView, FooterView, Song, Genres, Albums, Artists){
 	'use strict';
 	
 	var App = new Backbone.Marionette.Application();
@@ -32,6 +33,37 @@ function(Backbone, Communicator, PlayerView, HeaderView, FooterView, Song, Artis
 		
 		Communicator.mediator.trigger('APP:START');
 
+		var albums = new Albums(),
+				genres = new Genres(),
+				artists = new Artists();
+
+		// artists.once('sync', function(){
+		// 	genres.once('sync', function(){
+		// 		albums.once('sync', function(){
+		// 			_.delay(function(){
+		// 				for(var k = 0; k<=1000; k++){
+		// 					var ge = new Genres();
+		// 					for(var i =0; i <= _.random(1, genres.length); i++){
+		// 						ge.add(genres.at(i));
+		// 					}
+
+		// 					var album = _.sample(albums.models);
+		// 					// console.log(album.get('id'), album.get('artist').get('_id'));
+		// 					var x = new Song({
+		// 						name  : 'Song_'+k,
+		// 						img   : _.random(1, 4)+'.png',
+		// 						album : album,
+		// 						artist: album.get('artist'),
+		// 						genres : ge,
+		// 					});
+		// 					console.log(x);
+		// 					x.save();
+		// 				}
+		// 			}, 1000)
+					
+		// 		}).fetch();
+		// 	}).fetch();
+		// }).fetch();
 	});
 	
 	return App;

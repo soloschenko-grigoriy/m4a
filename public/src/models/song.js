@@ -7,7 +7,13 @@
  * @copyright Soloschenko G. soloschenko@gmail.com
  * 
  */
-define(['backbone', 'models/artist', 'models/album'], function(Backbone, Artist, Album){
+define([
+  'backbone',
+  'models/artist',
+  'models/album',
+  'models/genre',
+  'collections/genres'
+  ], function(Backbone, Artist, Album, Genre, Genres){
 
   'use strict';
 
@@ -33,15 +39,23 @@ define(['backbone', 'models/artist', 'models/album'], function(Backbone, Artist,
      */
     relations: [{
       type              : Backbone.HasOne,
-      key               : '_artist',
-      relatedModel      : Artist,
+      key               : 'album',
+      relatedModel      : Album,
+      // autoFetch         : true
     },
     {
       type              : Backbone.HasOne,
-      key               : '_album',
-      relatedModel      : Album,
-    }
-    ],
+      key               : 'artist',
+      relatedModel      : Artist,
+      // autoFetch         : true
+    },
+    {
+      type              : Backbone.HasMany,
+      key               : 'genres',
+      relatedModel      : Genre,
+      // autoFetch         : true,
+      collectionType    : Genres
+    }],
 
     /**
      * Url for sync with server
