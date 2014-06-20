@@ -10,24 +10,88 @@
 define([
   'backbone',
   'communicator',
-  'collections/albums',
-  'models/album',
-  'views/layout/index'
-  ], function(Backbone, Communicator, Albums, Album, IndexLayout){
+  'views/layout/index',
+  'views/layout/albums'
+  ], function(Backbone, Communicator, IndexLayout, AlbumsLayout){
 
   'use strict';
   
   return {
+
+    all: function(){
+      console.log('super!');
+    },
+    /**
+     * Index route
+     * 
+     * @return {Marionette.Controller} 
+     */
     index: function()
     {
       Communicator.reqres.request('RM:getRegion', 'main').show(new IndexLayout());
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'main');
 
+      return this;
     },
 
-    some: function()
+    /**
+     * Albums route - show all albums
+     * 
+     * @return {Marionette.Controller} 
+     */
+    albums: function()
     {
+      Communicator.reqres.request('RM:getRegion', 'main').show(new AlbumsLayout());
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'albums');
 
+      return this;
+    },
+
+    artists: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'artists');
+
+      return this;
+    },
+
+    charts: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'charts');
+
+      return this;
+    },
+
+    songs: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'songs');
+
+      return this;
+    },
+    recent: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'recent');
+
+      return this;
+    },
+    genres: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'genres');
+
+      return this;
+    },
+    moods: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'moods');
+
+      return this;
+    },
+    playlists: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'playlists');
+
+      return this;
     }
+
   };
 
 });

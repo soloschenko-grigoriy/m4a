@@ -4,13 +4,9 @@ define([
 	'views/item/player',
   'views/item/header',
   'views/item/footer',
-  'models/song',
-  'collections/genres',
-  'collections/albums',
-  'collections/artists'
 	],
 
-function(Backbone, Communicator, PlayerView, HeaderView, FooterView, Song, Genres, Albums, Artists){
+function(Backbone, Communicator, PlayerView, HeaderView, FooterView){
 	'use strict';
 	
 	var App = new Backbone.Marionette.Application();
@@ -33,37 +29,16 @@ function(Backbone, Communicator, PlayerView, HeaderView, FooterView, Song, Genre
 		
 		Communicator.mediator.trigger('APP:START');
 
-		var albums = new Albums(),
-				genres = new Genres(),
-				artists = new Artists();
+		// This is for pushstate
+		$(document).on('click', 'a:not([data-bypass])', function(e){
+			var href = $(this).prop('href'),
+					root = location.protocol+'//'+location.host+'/';
 
-		// artists.once('sync', function(){
-		// 	genres.once('sync', function(){
-		// 		albums.once('sync', function(){
-		// 			_.delay(function(){
-		// 				for(var k = 0; k<=1000; k++){
-		// 					var ge = new Genres();
-		// 					for(var i =0; i <= _.random(1, genres.length); i++){
-		// 						ge.add(genres.at(i));
-		// 					}
-
-		// 					var album = _.sample(albums.models);
-		// 					// console.log(album.get('id'), album.get('artist').get('_id'));
-		// 					var x = new Song({
-		// 						name  : 'Song_'+k,
-		// 						img   : _.random(1, 4)+'.png',
-		// 						album : album,
-		// 						artist: album.get('artist'),
-		// 						genres : ge,
-		// 					});
-		// 					console.log(x);
-		// 					x.save();
-		// 				}
-		// 			}, 1000)
-					
-		// 		}).fetch();
-		// 	}).fetch();
-		// }).fetch();
+			if(root===href.slice(0,root.length)){
+				e.preventDefault();
+				Backbone.history.navigate(href.slice(root.length), true);
+			}
+		});
 	});
 	
 	return App;

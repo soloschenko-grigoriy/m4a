@@ -14,8 +14,15 @@ define(['backbone'], function(Backbone){
   return Backbone.Marionette.AppRouter.extend({
 
     appRoutes: {
-      ''     : 'index',
-      'some' : 'some'
+      ''       : 'index',
+      'albums'    : 'albums',
+      'artists'   : 'artists',
+      'charts'    : 'charts',
+      'songs'     : 'songs',
+      'recent'    : 'recent',
+      'genres'    : 'genres',
+      'moods'     : 'moods',
+      'playlists' : 'playlists',
     }
 
   });
