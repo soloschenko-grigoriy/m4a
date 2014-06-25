@@ -1,0 +1,27 @@
+<div class="col-sm-4 col-md-3">
+  <div class="latest-content">
+    <div class="latest-content-image">
+      <img src="/assets/uploads/artists/{{img}}" alt="" />
+    </div>
+    <div class="latest-content-info">
+      <div class="meta">
+        <div class="icon">
+          <i class="fa fa-user"></i>
+        </div>
+        <h4>{{name}}</h4>
+        <p>{{#list genres }} {{name}} {{/list}}</p>
+      </div>
+    </div>
+  </div>
+
+  <ul class="share clearfix">
+    <li><a href="#"><i class="fa fa-lg fa-facebook"></i></a></li>
+    <li><a href="#"><i class="fa fa-lg fa-twitter"></i></a></li>
+    <li><a href="#"><i class="fa fa-lg fa-flickr"></i></a></li>
+    <li><a href="#"><i class="fa fa-lg fa-google-plus"></i></a></li>
+  </ul>
+</div>
+<div class="col-sm-8 col-md-9">
+  <h3>Biography of {{name}}</h3>
+  {{{ description }}}
+</div>

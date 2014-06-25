@@ -3,19 +3,19 @@
  * Module dependencies
  */
 
-var fs = require('fs');
-var express = require('express');
-var mongoose = require('mongoose');
-var config = require('config');
+var fs        = require('fs');
+var express   = require('express');
+var mongoose  = require('mongoose');
+var config    = require('config');
 
-var app = express();
-var port = process.env.PORT || 3000;
+var app   = express();
+var port  = process.env.PORT || 3000;
 
 
 // Connect to mongodb
 var connect = function () {
-  var options = { server: { socketOptions: { keepAlive: 1 } } };
-  mongoose.connect(config.db, options);
+  var options    = { server: { socketOptions: { keepAlive: 1 } } },
+      connection = mongoose.connect(config.db, options);
 };
 connect();
 

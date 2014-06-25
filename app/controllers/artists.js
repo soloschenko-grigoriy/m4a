@@ -19,15 +19,12 @@ var mongoose = require('mongoose'),
  */
 exports.list = function (req, res)
 {
-  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1,
-      perPage = 30,
-      options = {
-        perPage: perPage,
-        page: page,
-        limit: req.param('limit') ? req.param('limit') : 0,
-        sort: req.param('sort') ? req.param('sort') : '_id'
-      };
-
+  var options = {
+    page   : req.param('page')    ? req.param('page')   : 0,
+    limit  : req.param('limit')   ? req.param('limit')  : 50,
+    sort   : req.param('sort')    ? req.param('sort')   : '_id'
+  };
+  
   Artist.list(options, function(err, articles) {
     if(err){
       res.send('500', err);

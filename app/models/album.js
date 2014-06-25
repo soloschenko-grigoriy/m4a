@@ -6,7 +6,7 @@
  * @author Soloschenko G. soloschenko@gmail.com
  * 
  */
-var mongoose = require('mongoose');
+var mongoose      = require('mongoose');
 
 /**
  * 
@@ -17,6 +17,7 @@ var Schema = new mongoose.Schema({
   img     : String,
   artist  : { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' }
 });
+
 
 /**
  * Statics
@@ -44,17 +45,17 @@ Schema.statics = {
    * @param {Function} cb
    * @api private
    */
-  list: function (options, cb) {
-    var criteria = options.criteria || {};
-
-    var Artist = mongoose.model('Artist');
-    this.find(criteria)
+  list: function (options, cb)
+  {
+    this
+      .find(options.criteria || {})
       .populate('artist')
       .limit(options.limit)
+      .skip(options.page * options.limit)
       .sort(options.sort)
       .exec(cb);
 
-  
+    return this;
   },
 
 

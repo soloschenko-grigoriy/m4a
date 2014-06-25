@@ -13,6 +13,8 @@ define([
   'hbs!tmpl/layout/index',
   'views/composite/albums/index',
   'views/composite/artists/index',
+  'views/composite/genres/index',
+  'views/composite/moods/index',
   'views/composite/songs/index',
   'views/composite/songs/index-popular',
   ], function(
@@ -21,6 +23,8 @@ define([
     Tmpl,
     AlbumsCompositeView,
     ArtistsCompositeView,
+    GenresCompositeView,
+    MoodsCompositeView,
     SongsCompositeView,
     PopularCompositeView
   ){
@@ -59,6 +63,8 @@ define([
       albums:   '.albums',
       artists:  '.artists',
       popular:  '.popular',
+      genres:   '.genres',
+      moods:    '.moods',
       songs:    '.songs'
     },
 
@@ -75,6 +81,8 @@ define([
       this.artists.show(new ArtistsCompositeView());
       this.songs.show(new SongsCompositeView());
       this.popular.show(new PopularCompositeView());
+      this.genres.show(new GenresCompositeView());
+      this.moods.show(new MoodsCompositeView());
 
       return this;
     }

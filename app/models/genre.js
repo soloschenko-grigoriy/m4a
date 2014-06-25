@@ -44,11 +44,10 @@ Schema.statics = {
    */
   list: function (options, cb)
   {
-    var criteria = options.criteria || {};
-
     this
-      .find(criteria)
+      .find(options.criteria || {})
       .limit(options.limit)
+      .skip(options.page * options.limit)
       .sort(options.sort)
       .exec(cb);
 

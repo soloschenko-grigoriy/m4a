@@ -65,6 +65,30 @@ define(['backbone', 'models/artist'], function(Backbone, Model){
           sort: '-date'
         }
       });
+    },
+
+    /**
+     * Load data from server
+     * 
+     * @param  {Object} params 
+     * 
+     * @return {Backbone.Collection}        
+     */
+    load: function(params)
+    {
+      params = params || {};
+
+      this.fetch({
+        data: {
+          page  : params.page,
+          limit : 48,
+        },
+        success   : params.success,
+        error     : params.error,
+        remove    : false
+      });
+
+      return this;
     }
   });
 });

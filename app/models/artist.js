@@ -42,12 +42,11 @@ Schema.statics = {
    */
   list: function (options, cb)
   {
-    var criteria = options.criteria || {};
-
     this
-      .find(criteria)
+      .find(options.criteria || {})
       .populate('genres')
       .limit(options.limit)
+      .skip(options.page * options.limit)
       .sort(options.sort)
       .exec(cb);
   },

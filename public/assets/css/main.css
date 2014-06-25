@@ -2848,4 +2848,11 @@ ul.social li a:hover {
 	background: #f04933;
 	color: white;
 }
-
+.col-sm-3{
+	height: 425px;
+}
+.loader{
+	text-align: center;
+	margin: 20px 0;
+	font-size: 24px;
+}

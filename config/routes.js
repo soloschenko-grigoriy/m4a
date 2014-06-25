@@ -7,7 +7,8 @@ var home    = require('home'),
     albums  = require('albums'),
     artists = require('artists'),
     songs   = require('songs'),
-    genres  = require('genres');
+    genres  = require('genres'),
+    moods   = require('moods');
 
 /**
  * Expose
@@ -25,28 +26,34 @@ module.exports = function (app){
   app.get('/moods', home.index);
   app.get('/playlists', home.index);
 
+  app.get('/artists/:id', home.index);
+
   var prefix = '/api/v1';
 
   // Albums controllers
-  app.get(prefix+'/albums', albums.list);
+  app.get(prefix+'/albums',     albums.list);
   app.get(prefix+'/albums/:id', albums.load);
-  app.post(prefix+'/albums', albums.create);
+  app.post(prefix+'/albums',    albums.create);
 
   // Artist conrollers
-  app.get(prefix+'/artists', artists.list);
-  app.get(prefix+'/artists/:id', artists.load);
-  app.post(prefix+'/artists', artists.create);
+  app.get(prefix+'/artists',      artists.list);
+  app.get(prefix+'/artists/:id',  artists.load);
+  app.post(prefix+'/artists',     artists.create);
 
   // Songs conrollers
-  app.get(prefix+'/songs', songs.list);
-  app.get(prefix+'/songs/:id', songs.load);
-  app.post(prefix+'/songs', songs.create);
+  app.get(prefix+'/songs',      songs.list);
+  app.get(prefix+'/songs/:id',  songs.load);
+  app.post(prefix+'/songs',     songs.create);
 
   // Genres controllers
-  app.get(prefix+'/genres', genres.list);
+  app.get(prefix+'/genres',     genres.list);
   app.get(prefix+'/genres/:id', genres.load);
-  app.post(prefix+'/genres', genres.create);
+  app.post(prefix+'/genres',    genres.create);
 
+  // Moods controllers
+  app.get(prefix+'/moods',     moods.list);
+  app.get(prefix+'/moods/:id', moods.load);
+  app.post(prefix+'/moods',    moods.create);
 
   /**
    * Error handling

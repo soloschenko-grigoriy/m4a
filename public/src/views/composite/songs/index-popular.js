@@ -9,7 +9,7 @@
  */
 define([
   'backbone',
-  'views/item/songs/index',
+  'views/item/songs/index-popular',
   'hbs!tmpl/composite/songs/index-popular',
   'collections/songs',
 ],
