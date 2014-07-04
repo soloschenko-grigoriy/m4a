@@ -51,14 +51,18 @@ Schema.statics = {
    */
   list: function (options, cb)
   {
+    var criteria = {};
+
     if(options.artist){
-      options.criteria = {
-        artist: mongoose.Schema.Types.ObjectId(options.artist)
-      };
+      criteria.artist = options.artist;
+    }
+    
+    if(options.album){
+      criteria.album = options.album;
     }
     
     this
-      .find(options.criteria || {})
+      .find(criteria)
       .populate('album')
       .populate('artist')
       .populate('genres')

@@ -1,5 +1,5 @@
 /**
- * @class View for one songs on index page
+ * @class View for one artist on index page
  *
  * version 0.0.1
  *
@@ -9,10 +9,11 @@
  */
 define([
   'backbone',
-  'hbs!tmpl/item/songs/index'
+  'hbs!tmpl/item/albums/full'
 ],
-function(Backbone, Tmpl) {
-    'use strict';
+function(Backbone, Tmpl){
+  
+  'use strict';
 
   /* Return a ItemView class definition */
   return Backbone.Marionette.ItemView.extend({
@@ -22,12 +23,16 @@ function(Backbone, Tmpl) {
     /* Ui events hash */
     events: {},
 
-    className: 'col-sm-3',
+    className: '',
 
-    initialize: function() {},
-    
-    /* on render callback */
-    onRender: function() {}
+    initialize: function()
+    {
+    },
+
+    onRender: function()
+    {
+      
+    }
   });
 
 });

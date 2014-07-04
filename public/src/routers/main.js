@@ -25,6 +25,7 @@ define(['backbone'], function(Backbone){
       'playlists' : 'playlists',
 
       'artists/:id' : 'artist',
+      'albums/:id' : 'album',
     }
 
   });

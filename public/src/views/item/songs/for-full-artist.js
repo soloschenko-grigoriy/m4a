@@ -24,10 +24,13 @@ function(Backbone, Tmpl) {
 
     className: '',
 
-    initialize: function() {},
+    initialize: function(options) {
+      // console.log(options);
+    },
     
     /* on render callback */
-    onRender: function() {}
+    onRender: function(){
+    }
   });
 
 });

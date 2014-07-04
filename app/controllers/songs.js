@@ -26,6 +26,7 @@ exports.list = function (req, res)
     limit  : req.param('limit')   ? req.param('limit')  : 50,
     sort   : req.param('sort')    ? req.param('sort')   : '_id',
     artist : req.param('artist')  ? req.param('artist') : '',
+    album  : req.param('album')   ? req.param('album')  : '',
   };
 
   Song.list(options, function(err, articles) {

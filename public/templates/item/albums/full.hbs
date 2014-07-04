@@ -1,0 +1,25 @@
+<div class="album-banner">
+  <div class="banner-image">
+    <img src="/assets/uploads/albums/big/{{ img }}" alt="{{ name }}" />
+  </div>
+  <div class="row">
+    <div class="col-sm-8 album-title">
+      <h3>{{ name }}</h3>
+      <p>Release date: {{ date }}</p>
+    </div>
+    <div class="col-sm-4 album-btns">
+      <h5>This album is now available</h5>
+      <ul class="btns">
+        <li><a href="#">Download</a></li>
+        <li><a href="#">Add to playlist</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row album-info">
+  <div class="col-xs-12 col-md-9 col-md-offset-1">
+    <h3>Album Description</h3>
+    {{ description }}
+  </div>
+</div>

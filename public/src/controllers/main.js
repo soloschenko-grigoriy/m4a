@@ -18,6 +18,7 @@ define([
   'views/layout/genres',
   'views/layout/moods',
   'views/layout/artist',
+  'views/layout/album',
   ], function(
     Backbone,
     Communicator,
@@ -28,7 +29,8 @@ define([
     ChartsLayout,
     GenresLayout,
     MoodsLayout,
-    ArtistLayout
+    ArtistLayout,
+    AlbumLayout
   ){
 
   'use strict';
@@ -181,6 +183,20 @@ define([
       return this;
     },
 
+    /**
+     * Artist route - show all albums
+     * 
+     * @return {Marionette.Controller} 
+     */
+    album: function(id)
+    {
+      Communicator.reqres.request('RM:getRegion', 'main').show(new AlbumLayout().setId(id));
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'albums');
+
+      $(window).scrollTop();
+
+      return this;
+    },
 
   };
 

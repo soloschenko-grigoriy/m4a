@@ -10,7 +10,7 @@
 define([
   'backbone',
   'views/item/songs/for-full-artist',
-  'hbs!tmpl/composite/songs/list-for-full-artist',
+  'hbs!tmpl/composite/songs/list-for-full-album',
   'collections/songs',
 ],
 function(Backbone, ItemView, Tmpl, Collection) {
@@ -38,10 +38,7 @@ function(Backbone, ItemView, Tmpl, Collection) {
      * 
      * @type {String}
      */
-    className: 'col-sm-12 col-md-12',
-
-
-    id: 'songs',
+    className: '',
 
     /**
      * Selector of place for insert items
@@ -73,12 +70,12 @@ function(Backbone, ItemView, Tmpl, Collection) {
         .on('sync', _.bind(this.prepereIndex, this))
         .fetch({
           data: {
-            artist: params.artistId,
+            album: params.albumId,
             limit: 100
           }
         });
 
-      $(window).on('scroll', _.bind(this.onScroll, this));
+      // $(window).on('scroll', _.bind(this.onScroll, this));
 
       return this;
     },

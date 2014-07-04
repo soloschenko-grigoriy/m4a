@@ -27,6 +27,7 @@ module.exports = function (app){
   app.get('/playlists', home.index);
 
   app.get('/artists/:id', home.index);
+  app.get('/albums/:id', home.index);
 
   var prefix = '/api/v1';
 

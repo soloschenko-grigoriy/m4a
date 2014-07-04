@@ -10,19 +10,19 @@
 define([
   'backbone',
   'communicator',
-  'models/artist',
-  'hbs!tmpl/layout/fullArtist',
-  'views/item/artists/full',
-  'views/composite/songs/list-for-full-artist',
-  'views/composite/artists/featured-for-full'
+  'models/album',
+  'hbs!tmpl/layout/fullAlbum',
+  'views/item/albums/full',
+  'views/composite/songs/list-for-full-album',
+  'views/composite/albums/featured-for-full'
   ], function(
     Backbone,
     Communicator,
-    Artist,
+    Album,
     Tmpl,
-    ArtistView,
+    AlbumView,
     SongsView,
-    FeaturedArtistsView
+    FeaturedAlbumsView
   ){
 
   'use strict';
@@ -56,27 +56,27 @@ define([
      * @type {Object}
      */
     regions: {
-      artist:   '.row.artist-info',
-      songs:    '.row.songs',
+      album:    '.album',
+      songs:    '.songs',
       featured: '.featured'
     },
 
-    setId: function(artistId)
+    setId: function(albumId)
     {
-      this.artistId = artistId;
+      this.albumId = albumId;
 
-      this.artistModel = Artist.findOrCreate(this.artistId) || new Artist({ id: this.artistId });
+      this.albumModel = Album.findOrCreate(this.albumId) || new Album({ id: this.albumId });
 
-      this.artistModel.once('sync', _.bind(this.showArtist, this)).fetch();
+      this.albumModel.once('sync', _.bind(this.showAlbum, this)).fetch();
 
       return this;
     },
 
-    showArtist: function()
+    showAlbum: function()
     {
-      this.artist.show(new ArtistView({ model: this.artistModel }));
-      this.songs.show(new SongsView({ artistId: this.artistId }));
-      // this.featured.show(new FeaturedArtistsView({ artistId: this.artistId }));
+      this.album.show(new AlbumView({ model: this.albumModel }));
+      this.songs.show(new SongsView({ albumId: this.albumId }));
+      this.featured.show(new FeaturedAlbumsView({ albumId: this.albumId }));
 
       return this;
     }
