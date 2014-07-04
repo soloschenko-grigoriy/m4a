@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>M4A music online</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/ico" href="images/favicon.ico" />
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Dosis:400,500,600,700' rel='stylesheet' type='text/css' />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/vendor/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    
+</head>
+    
+  <body>
+    <div class="login">
+      <form action="/login" method="post">
+          <input type="hidden" name="_csrf" value="{{ csrf_token }}"/>
+
+          <label for="email">E-Mail <span>*</span></label>
+          <input type="email" name="email" id="email" value="" required />
+
+          <label for="password">Password <span>*</span></label>
+          <input type="password" name="password" id="password" value="" required />
+
+          <input type="submit" name="login" value="Login" class="btn btn-colored" />
+          <span class="error" {% if error %} style="display:inline">invalid login/password</span>
+      </form>
+    </div>
+  </body>
+</html>
+

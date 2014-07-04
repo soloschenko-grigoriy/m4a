@@ -17,6 +17,10 @@ module.exports = function (app){
   
   // Simple routes
   app.get('/', home.index);
+  app.get('/login', home.login);
+  app.post('/login', home.loginProcess);
+  app.get('/registration', home.registration);
+  
   app.get('/albums',  home.index);
   app.get('/artists', home.index);
   app.get('/songs',   home.index);
@@ -31,7 +35,7 @@ module.exports = function (app){
 
   var prefix = '/api/v1';
 
-  // Albums controllers
+  // Albums controllers 
   app.get(prefix+'/albums',     albums.list);
   app.get(prefix+'/albums/:id', albums.load);
   app.post(prefix+'/albums',    albums.create);

@@ -10,6 +10,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var swig = require('swig');
 var csrf = require('csurf');
 var serveStatic = require('serve-static');
 
@@ -53,6 +54,18 @@ module.exports = function (app, passport) {
   // Don't log during tests
   // Logging middleware
   if (env !== 'test') app.use(morgan(log));
+
+  // set views path, template engine and default layout
+  app.engine('html', swig.renderFile);
+  app.set('views', config.root + '/public' );
+  app.set('view engine', 'html');
+
+  // expose package.json to views
+  app.use(function (req, res, next) {
+    res.locals.pkg = pkg;
+    res.locals.env = env;
+    next();
+  });
 
 
   // expose package.json to views
