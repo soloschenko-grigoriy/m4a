@@ -20,6 +20,7 @@ module.exports = function (app){
   app.get('/login', home.login);
   app.post('/login', home.loginProcess);
   app.get('/registration', home.registration);
+  app.post('/registration', home.registrationProcess);
   
   app.get('/albums',  home.index);
   app.get('/artists', home.index);

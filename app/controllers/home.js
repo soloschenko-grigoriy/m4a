@@ -8,8 +8,17 @@
  */
 var mongoose = require('mongoose'),
     User     = mongoose.model('User'),
+    Invite   = mongoose.model('Invite'),
     crypto   = require('crypto');
 
+/**
+ *
+ * 
+ * @param  {Express.Request} req
+ * @param  {Express.Responce} res
+ *
+ * @return {void} 
+ */
 exports.index = function (req, res)
 {
   if(!req.cookies.user){
@@ -35,6 +44,10 @@ exports.index = function (req, res)
  */
 exports.login = function (req, res)
 {
+  if(req.cookies.user){
+    return res.redirect('/');
+  }
+
   res.render('login');
 };
 
@@ -49,7 +62,7 @@ exports.login = function (req, res)
 exports.loginProcess = function (req, res)
 {
   var email     = req.param('email'),
-      password  = req.param('password');
+      password  = req.param('password'),
       re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
 
@@ -83,7 +96,121 @@ exports.loginProcess = function (req, res)
   });
 };
 
+/**
+ *
+ * 
+ * @param  {Express.Request} req
+ * @param  {Express.Responce} res
+ *
+ * @return {void} 
+ */
 exports.registration = function (req, res)
 {
-  res.sendfile('public/registration.html');
+  if(req.cookies.user){
+    return res.redirect('/');
+  }
+
+  res.render('registration', { errors: {}, values: {
+    name      : req.param('name')  ? req.param('name')  : '',
+    email     : req.param('email') ? req.param('email') : '',
+    invite    : req.param('code')  ? req.param('code')  : '',
+    confirm   : '',
+    password  : ''
+  }});
+};
+
+/**
+ *
+ * 
+ * @param  {Express.Request} req
+ * @param  {Express.Responce} res
+ *
+ * @return {void} 
+ */
+exports.registrationProcess = function(req, res)
+{
+
+  var errors    = {},
+      email     = req.param('email'),
+      name      = req.param('name'),
+      invite    = req.param('invite'),
+      password  = req.param('password'),
+      confirm   = req.param('confirm'),
+      hasError  = false,
+      re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  var values = {
+    name      : name,
+    email     : email,
+    invite    : invite,
+    confirm   : confirm,
+    password  : password
+  };
+
+  if(!name){      hasError = true; errors.name     = 'empty'; }
+  if(!email){     hasError = true; errors.email    = 'empty'; }
+  if(!invite){    hasError = true; errors.invite   = 'empty'; }
+  if(!confirm){   hasError = true; errors.confirm  = 'empty'; }
+  if(!password){  hasError = true; errors.password = 'empty'; }
+  
+  if(hasError){
+    return res.render('registration', { errors:  errors, values: values });
+  }
+
+  if(!re.test(email)){      hasError = true; errors.email     = 'invalid'; }
+  if(password.length < 6){  hasError = true; errors.password  = 'invalid'; }
+  if(confirm !== password){ hasError = true; errors.confirm   = 'invalid'; }
+
+
+  if(hasError){
+    return res.render('registration', { errors:  errors, values: values });
+  }
+  
+
+  User.findOne({ email: email }, function(err, user){ // find out if the email is uniq
+
+    if(err){
+      return res.render('registration', { errors: { unkown: err }, values: values });
+    }
+
+    if(user){
+      return res.render('registration', { errors: { email: 'not-uniq' }, values: values });
+    }
+
+    Invite.findOne({ email: email, code: invite, used: false }, function(err, iviteModel){ // find out the invite
+      if(err){
+        return res.render('registration', { errors: { unkown: err }, values: values });
+      }
+
+      if(!iviteModel){
+        return res.render('registration', { errors: { invite: 'invalid' }, values: values });
+      }
+
+      iviteModel.update({ used: true, usedDate: new Date() }, function(err, iviteModel){ // update invote model
+
+        if(err){
+          return res.render('registration', { errors: { unkown: err }, values: values });
+        }
+
+        var hash = crypto.createHash('sha1').update( new Date().valueOf().toString() + Math.random().toString() + email).digest('hex');
+        User.create({ // filaly create user
+          name      : name,
+          email     : email,
+          password  : crypto.createHash('sha1').update(password).digest('hex'),
+          hash      : hash
+        }, function(err, user){
+
+          if(err){
+            return res.render('registration', { errors: { unkown: err }, values: values });
+          }
+
+          // and auth him automaticly
+          res.cookie('user', hash);
+          res.redirect('/');
+
+        });
+      });
+    });
+
+  });
 };

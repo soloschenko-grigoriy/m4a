@@ -1988,12 +1988,15 @@ a.next:hover, a.prev:hover {
 	Contact Styles
 -------------------------------------------------------*/
 .login{
-	margin-top:50px;
 	width:350px;
 	position:absolute;
 	top:50%;
 	left:50%;
 	margin:-100px -175px;
+}
+.login.registration{
+	top:0;
+	margin: 50px -175px;
 }
 .login label {
 	font-size: 16px;
@@ -2024,10 +2027,19 @@ a.next:hover, a.prev:hover {
 	margin-top: 20px;
 }
 
-.login .error{
+.registration input.error{
+	color: #db4a37;
+	border: 1px solid #db4a37;
+}
+.login span.error{
 	margin-left: 20px;
 }
-
+.login .error-text{
+	font-size: 12px;
+	margin-top: -25px;
+	margin-bottom: 15px;
+	color: #db4a37;
+}
 .login-details {
 	border-bottom: 1px solid #242424;
 	padding: 35px 0 10px;

@@ -18,12 +18,63 @@
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/vendor/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-    
+    <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
 
 </head>
     
 <body class="index">
-    
+  <div class="login registration">
+    <form action="/registration" method="post" autocomplete="off">
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}"/>
+
+      <div>
+        <label for="name">Name <span>*</span></label>
+        <input type="text" name="name" id="name" value="{{ values.name }}" required {% if errors.name %} class="error" {% endif %}  />
+        {% if errors.name === 'empty' %}<div class="error-text">this field is required</div>{% endif %}
+      </div>
+
+      <div>
+        <label for="email">E-Mail <span>*</span></label>
+        <input type="email" name="email" id="email" value="{{ values.email }}" required {% if errors.email %} class="error" {% endif %} autocomplete="off"/>
+        {% if errors.email === 'empty' %}<div class="error-text">this field is required</div>{% endif %}
+        {% if errors.email === 'invalid' %}<div class="error-text">this email is invalid</div>{% endif %}
+        {% if errors.email === 'not-uniq' %}<div class="error-text">this email is used allready</div>{% endif %}
+      </div>
+      
+      <div>  
+        <label for="password">Password <span>*</span></label>
+        <input type="password" name="password" id="password" value="{{ values.password }}" required {% if errors.password %} class="error" {% endif %} autocomplete="off" />
+        {% if errors.password === 'empty' %}<div class="error-text">this field is required</div>{% endif %}
+        {% if errors.password === 'invalid' %}<div class="error-text">password too short (min 6 symbols required)</div>{% endif %}
+      </div>
+
+      <div>
+        <label for="confirm">Cofirm <span>*</span></label>
+        <input type="password" name="confirm" id="confirm" value="{{ values.confirm }}" required {% if errors.confirm %} class="error" {% endif %} />
+        {% if errors.confirm === 'empty' %}<div class="error-text">this field is required</div>{% endif %}
+        {% if errors.confirm === 'invalid' %}<div class="error-text">not equal to password above</div>{% endif %}
+      </div>
+
+      <div>
+        <label for="invite">Invite code <span>*</span></label>
+        <input type="text" name="invite" id="invite" value="{{ values.invite }}" required {% if errors.invite %} class="error" {% endif %} />
+        {% if errors.invite === 'empty' %}<div class="error-text">this field is required</div>{% endif %}
+        {% if errors.invite === 'invalid' %}<div class="error-text">this invide code is invalid</div>{% endif %}
+      </div>
+
+      <input type="submit" name="registration" value="Register" class="btn btn-colored" />
+      <span class="error" {% if errors.unkown %} style="display:inline">unkown error occured. please try again later</span>{% endif %}
+    </form>
+  </div>
+
+  <script type="text/javascript">
+    $(function(){
+      $('input').on('keydown', function(){
+        $(this).removeClass('error');
+        $(this).parent().find('.error-text').hide();
+      })
+    })
+  </script>
 </body>
 </html>
 
