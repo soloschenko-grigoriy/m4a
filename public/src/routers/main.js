@@ -23,6 +23,7 @@ define(['backbone'], function(Backbone){
       'genres'    : 'genres',
       'moods'     : 'moods',
       'playlists' : 'playlists',
+      'profile'   : 'profile',
 
       'artists/:id' : 'artist',
       'albums/:id' : 'album',

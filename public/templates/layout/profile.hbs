@@ -1,0 +1,78 @@
+<div class="container">
+
+  <h2>Personal info</h2>
+  <div class="row" style="margin-bottom:100px;">
+    <form enctype="application/x-www-form-urlencoded" >
+      <div class="col-sm-6">
+        <div>
+          <label for="name">Name <span>*</span></label>
+          <input type="text" name="name" id="name" value="" required="">
+        </div>
+
+        <div>
+          <label for="email">Email <span>*</span></label>
+          <input type="email" name="email" id="email" value="" required="">
+        </div>
+
+        <div>
+          <label for="ava">Ava <span>*</span></label>
+          <div class="row">
+            <div class="col-sm-6" >
+              <i class="fa fa-user ava-big" />
+              <i class="fa fa-user ava-middle" />
+              <i class="fa fa-user ava-small"/>
+            </div>
+            <div class="col-sm-6" style="margin-top:40px;">
+              <div class="btn btn-outline btn-colored fileinput-button">
+                  <span>Select file</span>
+                  <!-- The file input field used as target for the file upload widget -->
+                  <input id="ava" type="file" name="ava">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <input type="submit" value="Save" class="btn btn-colored" />
+      </div>
+    </form>
+  </div>
+
+  <h2>Sequrity</h2>
+  <div class="row" style="margin-bottom:100px;">
+    <div class="col-sm-6">
+      <div>
+        <label for="old-password">Old Password <span>*</span></label>
+        <input type="password" name="old-password" id="old-password" value="" required="">
+      </div>
+
+      <div>
+        <label for="new-password">New Password <span>*</span></label>
+        <input type="password" name="new-password" id="new-password" value="" required="">
+      </div>
+
+      <div>
+        <label for="cofirm-password">Cofirm New Password <span>*</span></label>
+        <input type="password" name="cofirm-password" id="cofirm-password" value="" required="">
+      </div>
+
+      <input type="submit" value="Change" class="btn btn-colored" />
+    </div>
+  </div>
+
+  <h2>Invite friend</h2>
+  <div class="row">
+    <div class="col-sm-6">
+      <div>
+        <label for="old-password">Email <span>*</span></label>
+        <input type="email" name="invite-email" id="invite-email" value="" required="">
+      </div>
+
+      <div>
+        <label for="message">Message</label>
+        <textarea name="message" id="message"></textarea>
+      </div>
+
+      <input type="submit" value="Send" class="btn btn-colored" />
+    </div>
+  </div>
+</div>

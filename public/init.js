@@ -32,7 +32,7 @@ require.config({
 
         /* Alias text.js for template loading and shortcut the templates dir to tmpl */
         text: '../vendor/requirejs-text/text',
-        tmpl: "../templates",
+        tmpl: '../templates',
         
         /* handlebars from the require handlerbars plugin below */
         handlebars: '../vendor/require-handlebars-plugin/Handlebars',
@@ -40,7 +40,11 @@ require.config({
         /* require handlebars plugin - Alex Sexton */
         i18nprecompile: '../vendor/require-handlebars-plugin/hbs/i18nprecompile',
         json2: '../vendor/require-handlebars-plugin/hbs/json2',
-        hbs: '../vendor/require-handlebars-plugin/hbs'
+        hbs: '../vendor/require-handlebars-plugin/hbs',
+
+        'jquery.fileupload': '../vendor/blueimp-file-upload/js/jquery.fileupload',
+        'jquery.ui.widget': '../vendor/jquery-ui/ui/minified/widget.min',
+        'jquery.iframe.transport': '../vendor/blueimp-file-upload/js/jquery.iframe-transport'
     },
 
     hbs: {

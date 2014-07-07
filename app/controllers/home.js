@@ -6,10 +6,13 @@
  * @author Soloschenko G. soloschenko@gmail.com
  * 
  */
-var mongoose = require('mongoose'),
-    User     = mongoose.model('User'),
-    Invite   = mongoose.model('Invite'),
-    crypto   = require('crypto');
+var mongoose     = require('mongoose'),
+    User         = mongoose.model('User'),
+    Invite       = mongoose.model('Invite'),
+    crypto       = require('crypto'),
+    upload       = require('jquery-file-upload-middleware'),
+    config       = require('config'),
+    fs           = require('fs');
 
 /**
  *
@@ -214,3 +217,26 @@ exports.registrationProcess = function(req, res)
 
   });
 };
+
+exports.upload = function(req, res, next)
+{
+  upload.fileHandler({
+    uploadDir: config.root + '/public/assets/uploads/users/',
+    uploadUrl: '/assets/uploads/users',
+    imageVersions: {
+      '128x128': {
+        width: 128,
+        height: 128
+      },
+      '64x64': {
+        width: 64,
+        height: 64
+      },
+      '32x32': {
+        width: 32,
+        height: 64
+      },
+    }
+  })(req, res, next);
+};
+

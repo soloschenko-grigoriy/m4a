@@ -22,7 +22,6 @@ var config = require('config');
 var pkg = require('../package.json');
 
 var env = process.env.NODE_ENV || 'development';
-
 /**
  * Expose
  */
@@ -77,6 +76,7 @@ module.exports = function (app, passport) {
 
   // cookieParser should be above session
   app.use(cookieParser());
+
 
   // bodyParser should be above methodOverride
   app.use(bodyParser());

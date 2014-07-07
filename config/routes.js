@@ -22,6 +22,8 @@ module.exports = function (app){
   app.get('/registration', home.registration);
   app.post('/registration', home.registrationProcess);
   
+  app.post('/upload', home.upload);
+  
   app.get('/albums',  home.index);
   app.get('/artists', home.index);
   app.get('/songs',   home.index);
@@ -30,6 +32,7 @@ module.exports = function (app){
   app.get('/genres', home.index);
   app.get('/moods', home.index);
   app.get('/playlists', home.index);
+  app.get('/profile', home.index);
 
   app.get('/artists/:id', home.index);
   app.get('/albums/:id', home.index);

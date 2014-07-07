@@ -19,6 +19,7 @@ define([
   'views/layout/moods',
   'views/layout/artist',
   'views/layout/album',
+  'views/layout/profile',
   ], function(
     Backbone,
     Communicator,
@@ -30,7 +31,8 @@ define([
     GenresLayout,
     MoodsLayout,
     ArtistLayout,
-    AlbumLayout
+    AlbumLayout,
+    ProfileLayout
   ){
 
   'use strict';
@@ -198,6 +200,20 @@ define([
       return this;
     },
 
+    /**
+     * Profile route
+     * 
+     * @return {Marionette.Controller} 
+     */
+    profile: function()
+    {
+      Communicator.mediator.trigger('ROUTE:CHANGE', 'profile');
+      Communicator.reqres.request('RM:getRegion', 'main').show(new ProfileLayout());
+
+      $(window).scrollTop();
+
+      return this;
+    },
   };
 
 });
