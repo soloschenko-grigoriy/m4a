@@ -37,14 +37,15 @@ require.config({
         /* handlebars from the require handlerbars plugin below */
         handlebars: '../vendor/require-handlebars-plugin/Handlebars',
 
-        /* require handlebars plugin - Alex Sexton */
+        /* etc... */
         i18nprecompile: '../vendor/require-handlebars-plugin/hbs/i18nprecompile',
         json2: '../vendor/require-handlebars-plugin/hbs/json2',
         hbs: '../vendor/require-handlebars-plugin/hbs',
-
         'jquery.fileupload': '../vendor/blueimp-file-upload/js/jquery.fileupload',
         'jquery.ui.widget': '../vendor/jquery-ui/ui/minified/widget.min',
-        'jquery.iframe.transport': '../vendor/blueimp-file-upload/js/jquery.iframe-transport'
+        'jquery.iframe.transport': '../vendor/blueimp-file-upload/js/jquery.iframe-transport',
+        jplayer: '../vendor/jplayer/jquery.jplayer.min',
+
     },
 
     hbs: {

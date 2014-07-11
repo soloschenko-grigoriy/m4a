@@ -1,23 +1,341 @@
+<style>
+
+.player-volume-white-line {
+    width: 100%;
+    height: 15px;
+    position: relative;
+    display: block;
+    top: -5px;
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+
+.player-volume-back-line {
+    width: 100%;
+    height: 7px;
+    margin: 0;
+    position: relative;
+    display: block;
+    top: -15px;
+    background: url(/assets/img/player/volume-back-line.png) repeat-x;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 4px; 
+}
+
+.player-volume-line {
+    width: 0%;
+    height: 7px;
+    margin: -12px 0 0 0;
+    position: relative;
+    display: block;
+    top: -10px;
+    background: url(/assets/img/player/volume-line.png) repeat-x;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 4px;
+}
+
+.player-volume-slider {
+    display: block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    right: -9px;
+    top: -6px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: url(/assets/img/player/volume-slider.png) no-repeat;
+    cursor: pointer;
+}
+
+.player-back-line {
+    width: 100%;
+    height: 7px;
+    margin: 0;
+    position: relative;
+    display: block;
+    top: -15px;
+    background: url(/assets/img/player/back-line.png) repeat-x;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 4px;
+}
+
+.player-white-line {
+    width: 100%;
+    height: 15px;
+    position: relative;
+    display: block;
+    top: -5px;
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+
+.player-load-line {
+    width: 0%;
+    height: 7px;
+    margin: 0;
+    position: relative;
+    display: block;
+    top: -22px;
+    background: url(/assets/img/player/load-line.png) repeat-x;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 4px;
+}
+
+.player-progress-line {
+    width: 0%;
+    height: 7px;
+    margin: -12px 0 0 0;
+    position: relative;
+    display: block;
+    top: -17px;
+    background: url(/assets/img/player/progress-line.png) repeat-x;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -webkit-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 4px;
+}
+
+.player-progress-slider {
+  display: block;
+  position: absolute;
+  width: 6px;
+  height: 13px;
+  right: -3px;
+  top: -3px;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: none;
+  background: url(/assets/img/player/slider.png) no-repeat;
+
+  cursor: pointer;
+}
+
+.player-buttons-left,
+.player-buttons-right {
+    margin-top: 12px;
+}
+
+.player-buttons-left,
+.player-buttons-progress,
+.player-volume
+ {
+    float: left;
+}
+
+.player-buttons-right {
+    float: right;
+}
+
+.player-buttons-left > a.button,
+.player-buttons-right > a.button {
+    padding-left: 5px;
+    display: inline-block;
+}
+
+.player-buttons-left > a.button > i,
+.player-buttons-right > a.button > i {
+    color: #CCC;
+}
+
+.player-buttons-left > a.button:hover > i,
+.player-buttons-right > a.button:hover > i {
+    color: #EEE;
+    animation: playButtonsShadow 0.5s;
+    animation-fill-mode: forwards;
+    -webkit-animation: playButtonsShadow 0.5s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes playButtonsShadow {
+    from {text-shadow: 0px 0px 10px rgba(255, 255, 255, 0);}
+    to {text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);}
+}
+@-webkit-keyframes playButtonsShadow {
+    from {text-shadow: 0px 0px 10px rgba(255, 255, 255, 0);}
+    to {text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);}
+}
+
+.disable-select, .disable-select * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.bg-line {
+    background: url(/assets/img/player/bg-line-shaddow-left.png), url(/assets/img/player/bg-line-lighter-center.png), url(/assets/img/player/bg-line-shaddow-right.png);
+    background-position: left top, center top, right top;
+    background-repeat: no-repeat;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border-top: 1px solid #74767b;
+    border-bottom: 1px solid #a0a5ae;
+}
+
+.bg-line-border {
+    background: url(/assets/img/player/bg-line.png) repeat-x;
+    border: 1px solid #646a6f;
+    border-top: 1px solid #434a4f;
+    margin-top: 5px;
+    border-radius: 6px;
+}
+
+.player-artist-name {
+    text-align: center;
+    font-size: 13px;
+    color: #262626;
+    font-weight: bold;
+    line-height: normal;
+}
+
+.player-song-name {
+    text-align: center;
+    font-size: 12px;
+    color: #262626;
+    line-height: normal;
+    position: relative;
+    top: -18px;
+}
+
+.player-time-plus,
+.player-time-minus {
+    color: #262626;
+    font-size: 10px;
+    line-height: normal;
+    vertical-align: top;
+    width: 28px;
+    max-width: 28px;
+    overflow: hidden;
+}
+
+.player-progress-table-block {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+}
+
+#player-volume {
+    width: 10%;
+    min-width: 100px;
+    max-width: 300px;
+}
+
+#player-volume {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+/* Buttons style */
+.play-button i, .pause-button i {
+    width: 16px;
+    margin-right: 2px;
+}
+
+.backward-button {
+    margin-right: 3px;
+}
+</style>
+
+<script>
+    $(function() {
+        function playerProgressSetSize() {
+            var playerProgressPadding = 20;
+            var playerProgressSize = ($("#player").width() - playerProgressPadding - $("#player-buttons-right").width()) + 'px';
+            $("#player-progress").css("width", playerProgressSize);
+            $("#player-progress").css("padding-left", ($("#player-buttons-left").width() + 20 + $("#player-volume").width() + playerProgressPadding) + 'px');
+        }
+        playerProgressSetSize();
+
+        $( window ).resize(function() {
+            playerProgressSetSize();
+        });
+
+        //
+        // Load bar simulation
+        //
+        function playerLoadLine(loadPercent) {
+            loadPercent = loadPercent > 100 ? 100 : loadPercent;
+
+            $("#player-load-line").css("width", loadPercent + "%");
+
+            if (loadPercent < 100)
+            {
+                setTimeout(playerLoadLine, 100, loadPercent + 10);
+            }
+        }
+        setTimeout(playerLoadLine, 10, 1);
+
+    });
+</script>
+
 <div class="container">
-    our player here!
-    <!-- <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-1">
-                    <i class="fa fa-play"></i>
-                    <i class="fa fa-fast-backward"></i>
-                </div>
-                <div class="col-md-9">
-                    <div style="width:100%;height:5px;border-radius:5px;background:#444;display:inline-block"></div>
-                </div>
-                <div class="col-md-2">
-                    <i class="fa fa-fast-forward"></i>
-                    <i class="fa fa-repeat"></i>
-                    <i class="fa fa-random"></i>
-                    <i class="fa fa-volume-up"></i>
-                    <i class="fa fa-bars"></i>
-                </div>
+    <div id="jplayer"></div>
+    <div id="player">
+        <div class="player-buttons-right" id="player-buttons-right">
+            <a href="/" class="button" onClick="return false;"><i class="fa fa-repeat"></i></a>
+            <a href="/" class="button" onClick="return false;"><i class="fa fa-random"></i></a>
+            <a href="/" class="button" onClick="return false;"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="player-buttons-left" id="player-buttons-left">
+            <a href="/" class="button backward-button"><i class="fa fa-fast-backward"></i></a>
+            <a href="/" class="button play-button"><i class="fa fa-play"></i></a>
+            <a href="/" class="button pause-button" style="display:none;"><i class="fa fa-pause"></i></a>
+            <a href="/" class="button forward-button"><i class="fa fa-fast-forward"></i></a>
+        </div>
+        <div class="player-volume" id="player-volume">
+            <div class="player-volume-block" id="player-volume-block">
+                <!--
+                    --><div class="player-volume-white-line"><!-- --></div><!--
+                    --><div class="player-volume-back-line" id="player-back-line"><!-- --></div><!--
+                    --><div id="player-volume-line" class="player-volume-line" style="width: 60%;"><div class="player-volume-slider"><!-- --></div></div><!--
+                -->
             </div>
         </div>
-    </div> -->
+        <div class="player-progress" id="player-progress">
+            <div class="bg-line-border"><div class="bg-line">
+
+                <div class="player-artist-name" id="player-artist-name">AC/DC</div>
+                <table width="100%" border="0">
+                    <tr>
+                        <td class="player-time-plus" id="player-time-plus"><nobr>0:21</nobr></td>
+                        <td class="player-progress-table-block">
+                            <div id="player-progress-block"><!--
+                            --><div class="player-white-line"><!-- --></div><!--
+                            --><div class="player-back-line" id="player-back-line"><!-- --></div><!--
+                            --><div id="player-load-line" class="player-load-line" style="width: 0%;"><!-- --></div><!--
+                            --><div id="player-progress-line" class="player-progress-line"><div class="player-progress-slider"><!-- --></div></div><!--
+                        --></div>
+                        </td>
+                        <td class="player-time-minus" id="player-time-minus"><nobr>-3:21</nobr></td>
+                    </tr>
+                </table>
+
+            </div></div>
+
+            <div class="player-song-name" id="player-song-name">Back in black - Back in black</div>
+
+        </div>
+    </div>
 </div><!-- end container -->
